@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const errorHandlers = require('./errorHandlers'); // Importing error handlers module
-
+const helpers = require("./helpers");
 var routes = require('./routes');
 
 app.use('/', routes);
@@ -10,17 +10,9 @@ app.use('/', routes);
 app.use(errorHandlers.handle404Error);
 app.use(errorHandlers.handleGlobalErrors);
 
-/*
-* Helpers for Various Tasks
-*/
+app.use(helpers.reverseString);
+app.use(helpers.shortenString);
 
-// Helper function to reverse a string
-const reverseString = (string) => [...string].reverse().join('');
-
-// Helper function to shorten a string to fifty characters
-const shortenString = (string) => {
-  return string.length > 50 ? string.substring(0, 50) + "..." : string;
-}
 
 /*
 * 404 and Global Error Handlers
