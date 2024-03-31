@@ -1,11 +1,14 @@
 // Import Express and set up the app
 const express = require('express');
 const app = express();
+const errorHandlers = require('./errorHandlers'); // Importing error handlers module
 
 var routes = require('./routes');
 
 app.use('/', routes);
 
+app.use(errorHandlers.handle404Error);
+app.use(errorHandlers.handleGlobalErrors);
 
 /*
 * Helpers for Various Tasks

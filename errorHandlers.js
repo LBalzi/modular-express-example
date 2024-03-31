@@ -4,7 +4,7 @@
 
 
 // Error handler for handling non-existent routes
-app.use((req, res, next) => {
+function handle404Error(req, res, next) {
     // Log statement to indicate that this function is running 
     console.log('Handling 404 error');
   
@@ -15,10 +15,10 @@ app.use((req, res, next) => {
   
     // Pass error to global error handler below
     next(err);
-  });
+  };
   
   // Global error handler
-  app.use((err, req, res, next) => {
+  function handleGlobalErrors(err, req, res, next) {
     // Log statement to indicate that this function is running
     console.log('Handling a global error');
     console.log(err);
@@ -30,5 +30,9 @@ app.use((req, res, next) => {
     // Set error status and send error message to the page 
     res.status(err.status || 500);
     res.send(err.message);
-  });
+  };
   
+  module.exports = {
+    handle404Error,
+    handleGlobalErrors
+};
