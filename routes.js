@@ -31,3 +31,4 @@ router.get('/', (req, res) => {
     throw err;
   });
   
+module.exports = router;
